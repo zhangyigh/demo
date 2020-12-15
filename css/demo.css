@@ -1,0 +1,177 @@
+@charset "UTF-8";
+/* 声明两个变量 */
+div {
+  width: 0.8;
+}
+
+/* 选择器嵌套 */
+.main {
+  color: red;
+}
+
+.main .sdf {
+  color: blue;
+}
+
+/* 属性嵌套 */
+.shuxing {
+  color: blue;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+/* 伪类嵌套 &伪元素嵌套*/
+.weilei:hover {
+  color: red;
+}
+
+.weilei::after {
+  clear: both;
+  content: "";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+/* 插值 */
+.cha {
+  border-top: 10px;
+}
+
+/* 继承 */
+.a, .b, .c {
+  color: red;
+}
+
+.b {
+  font-size: 12px;
+}
+
+.c {
+  width: 120px;
+}
+
+/* 占位符 %*/
+.d, .e {
+  color: blue;
+}
+
+.d {
+  font-weight: 100;
+}
+
+.e {
+  background-color: red;
+}
+
+/* 混合宏不带参数 */
+.f {
+  width: 10px;
+  color: gray;
+}
+
+.g {
+  width: 100px;
+  color: gray;
+}
+
+/* 混合宏带参数及默认值 */
+.h {
+  color: yellow;
+  width: 20px;
+}
+
+.i {
+  color: blue;
+  width: 20px;
+}
+
+/* 流程控制if */
+.q {
+  width: 100px;
+}
+
+/* 流程控制for */
+.item-1 {
+  width: 19px;
+}
+
+.item-2 {
+  width: 18px;
+}
+
+.item-3 {
+  width: 17px;
+}
+
+/* 流程控制while*/
+/* 流程控制each */
+.logo-img {
+  background-image: url("images/logo.png");
+}
+
+.banner-img {
+  background-image: url("images/banner.png");
+}
+
+.btn-img {
+  background-image: url("images/btn.png");
+}
+
+.zhi {
+  width: 1px;
+}
+
+.zhi {
+  width: 2px;
+}
+
+.zhi {
+  width: 3px;
+}
+
+.sprite1, .sprite2, .sprite3 {
+  background: url("images/sprite.png") no-repeat;
+}
+
+.sprite1 {
+  background-position: 0 -30px;
+}
+
+.sprite2 {
+  background-position: 0 -60px;
+}
+
+.sprite3 {
+  background-position: 0 -90px;
+}
+
+.logs {
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.quotes {
+  content: hello;
+}
+
+.quotese {
+  content: "hello";
+}
+
+.error, .seriousError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+.error.intrusion, .intrusion.seriousError {
+  background-image: url("/image/hacked.png");
+}
+
+.seriousError {
+  border-width: 3px;
+}
+
+.test {
+  width: 10;
+}

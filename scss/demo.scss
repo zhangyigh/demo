@@ -1,0 +1,290 @@
+ /* 声明两个变量 */
+ 
+ $aa:12px;
+ $b:15px;
+ div {
+     width: $aa/$b;
+ }
+ /* 选择器嵌套 */
+ 
+ .main {
+     color: red;
+     .sdf {
+         color: blue;
+     }
+ }
+ /* 属性嵌套 */
+ 
+ .shuxing {
+     color: blue;
+     margin: {
+         top: 10px;
+         left: 20px;
+     }
+ }
+ /* 伪类嵌套 &伪元素嵌套*/
+ 
+ .weilei {
+     &:hover {
+         color: red;
+     }
+     &::after {
+         clear: both;
+         content: "";
+         display: block;
+         height: 0;
+         visibility: hidden;
+     }
+ }
+ /* 插值 */
+ 
+ $chazhi:10px;
+ $top:'top';
+ .cha {
+     border-#{$top}: $chazhi;
+ }
+ /* 继承 */
+ 
+ .a {
+     color: red;
+ }
+ 
+ .b {
+     @extend .a;
+     font-size: 12px;
+ }
+ 
+ .c {
+     @extend .a;
+     width: 120px;
+ }
+ /* 占位符 %*/
+ 
+ %zw {
+     color: blue;
+ }
+ 
+ .d {
+     @extend %zw;
+     font-weight: 100;
+ }
+ 
+ .e {
+     @extend %zw;
+     background-color: red;
+ }
+ /* 混合宏不带参数 */
+ 
+ @mixin hong {
+     color: gray;
+ }
+ 
+ .f {
+     width: 10px;
+     @include hong;
+ }
+ 
+ .g {
+     width: 100px;
+     @include hong;
+ }
+ /* 混合宏带参数及默认值 */
+ 
+ @mixin dc($cs:yellow) {
+     color: $cs;
+ }
+ 
+ .h {
+     @include dc;
+     width: 20px;
+ }
+ 
+ .i {
+     @include dc(blue);
+     width: 20px;
+ }
+ /* 流程控制if */
+ 
+ @mixin ifs($aa) {
+     @if($aa>10px) {
+         width: 100px;
+     }
+     @else {
+         width: 20px;
+     }
+ }
+ 
+ .q {
+     @include ifs(50)
+ }
+ /* 流程控制for */
+ 
+ @for $i from 1 through 3 {
+     .item-#{$i} {
+         width: (20px-$i);
+     }
+ }
+ 
+ //  @for $i from 1 to 3 {
+ //      .it#{$i} {
+ //          width: 20px*$i;
+ //      }
+ //  }
+ //  @for $i from 1 through 3 {
+ //      .border-#{$i} {
+ //          border:#{$i}px solid rgb(121, 115, 115);
+ //      }
+ //  }
+ /* 流程控制while*/
+ /* 流程控制each */
+ 
+ $list:logo,
+ banner,
+ btn;
+ @each $var in $list {
+     .#{$var}-img {
+         background-image:url("images/#{$var}.png");
+     }
+ }
+ 
+ $pxs:1px,
+ 2px,
+ 3px;
+ @each $key in $pxs {
+     .zhi {
+         width: $key;
+     }
+ }
+ 
+ $list:sprite1,
+ sprite2,
+ sprite3;
+ %spriteAll {
+     background: url("images/sprite.png") no-repeat;
+ }
+ 
+ @each $var in $list {
+     .#{$var} {
+         @extend %spriteAll;
+         background-position: 0 index($list, $var) * (-30px);
+     }
+ }
+ 
+ $properties:(margin,
+ padding);
+ @mixin asd($names,
+ $vals) {
+     @each $val in $properties {
+         #{$val}-#{$names}: $vals;
+     }
+ }
+ 
+ .logs {
+     @include asd(left,
+     10px)
+ }
+ 
+ .quotes {
+     content: unquote('hello');
+ }
+ 
+ .quotese {
+     content: quote(hello);
+ }
+ 
+ .error {
+     border: 1px #f00;
+     background-color: #fdd;
+ }
+ 
+ .error.intrusion {
+     background-image: url("/image/hacked.png");
+ }
+ 
+ .seriousError {
+     @extend .error;
+     border-width: 3px;
+ }
+ 
+ %extreme {
+     color: blue;
+     font-weight: bold;
+     font-size: 2em;
+ }
+ 
+ @mixin error($x) {
+     @if $x < 10 {
+         width: $x * 10px;
+     }
+     @else if $x==10 {
+         width: $x;
+     }
+     @else {
+         @error "你需要将#{$x}值设置在10以内的数";
+     }
+ }
+ 
+ .test {
+     @include error(10);
+ }
+ 
+ //  a[href^='asd']:before {
+ //      content: ''
+ //  }
+ //  a[href$='asd']::after {
+ //      content: ''
+ //  }
+ //  a[href*='asd']::after {
+ //      content: ''
+ //  }
+ //  a:first-child {
+ //      color: red;
+ //  }
+ //  a:last-child {
+ //      color: cyan;
+ //  }
+ //  a:nth-child(2) {
+ //      color: orange;
+ //  }
+ //  //  a:only-child {}
+ //  p:nth-of-type(2) {
+ //      font-size: 20px;
+ //      color: green;
+ //  }
+ //  p:first-of-type {
+ //      font-size: 20px;
+ //      font-weight: bold;
+ //      color: purple;
+ //  }
+ //  p:last-of-type {
+ //      font-size: 20px;
+ //      font-weight: bold;
+ //      color: gray;
+ //  }
+ //  p:last-of-type::before {
+ //      content: '我是最后一个p标签';
+ //  }
+ //  p:last-of-type::after {
+ //      content: '我是最后一个p标签';
+ //  }
+ //  p::selection {
+ //      background: blue;
+ //      color: brown;
+ //  }
+ //  p:only-of-type {}
+ //  a:not(1){} 选择某个元素外的所有元素
+ // a:empty 选择除了不包含子节点和内容的a元素
+ //  .spans {
+ //      border: 1px solid;
+ //      width: 100px;
+ //      font-size: 15px;
+ //      color: blue;
+ //      white-space: nowrap; //强制在一行
+ //      text-overflow: ellipsis; //隐藏部分显示省略号
+ //      overflow: hidden; //溢出内容隐藏
+ //      //  word-wrap: break-word; 强制换行
+ //  }
+ //  css3 变形 过渡  动画
+ // 变形  transform 方法 
+ //  translate位移 scale缩放 rotate旋转  skew倾斜 transofrm-origin 中心原点
+ //  过渡transition:width 1s linear 2s;
